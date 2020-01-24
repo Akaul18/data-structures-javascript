@@ -10,7 +10,7 @@ class SinglyLinkedList {
   insertAtBegining(data) {
     let newNode = new Node(data);
 
-    if (this.getHead() === null) {
+    if (this.head === null) {
       this.head = newNode;
       //   return false;
     } else {
@@ -19,13 +19,34 @@ class SinglyLinkedList {
       newNode.pointer = this.head;
       this.head = newNode;
     }
+    // console.log(this);
     this.noOfNodes++;
-    console.log(this);
+  }
+
+  insertAtPos(index, data) {
+    let curr, prev;
+    let iterator = 1;
+    if (index == 0) {
+      this.insertAtBegining(data);
+    } else if (index == this.noOfNodes) {
+      this.insertAtEnd(data);
+    } else {
+      let node = new Node(data);
+      curr = this.head;
+      while (iterator < index) {
+        prev = curr;
+        curr = curr.pointer;
+        iterator++;
+      }
+      node.pointer = curr;
+      prev.pointer = node;
+    }
+    this.noOfNodes++;
   }
 
   insertAtEnd(data) {
     let newNode = new Node(data);
-    if (this.getHead() === null) {
+    if (this.head === null) {
       this.head = newNode;
     } else {
       this.tail = this.head;
@@ -37,26 +58,15 @@ class SinglyLinkedList {
     this.noOfNodes++;
   }
 
-  insertAtPosition(pos, data) {
-    let newNode = new Node(data);
-    if (this.getHead() === null || pos==0) {
-      this.head = newNode;
-    } else {
-      if (pos > 0 && pos > this.count) {
-        return 'Invalid position';
-      }else
-    }
-  }
-
   traverseList(node) {
-    while (node) {
-      console.log(node.data);
-      if (node.pointer !== null) {
-        node = node.pointer;
-      } else {
-        break;
-      }
+    // while (node) {
+    console.log(node.data);
+    if (node.pointer !== null) {
+      // node = node.pointer;
+      return this.traverseList(node.pointer);
     }
+    //   else break;
+    // }
   }
 
   getHead() {
@@ -70,13 +80,13 @@ class SinglyLinkedList {
 
 let sll = new SinglyLinkedList();
 
-console.log(sll.getHead());
 sll.insertAtBegining(10);
 sll.insertAtBegining(20);
 sll.insertAtBegining(30);
 sll.insertAtBegining(40);
 sll.insertAtBegining(50);
 sll.insertAtEnd(5);
-sll.traverseList(sll.getHead());
+
+sll.insertAtPos(6, 45);
 console.log(sll.getTail());
-console.log(sll.noOfNodes);
+sll.traverseList(sll.getHead());
