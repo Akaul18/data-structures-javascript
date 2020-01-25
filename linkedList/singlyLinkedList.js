@@ -90,6 +90,15 @@ class SinglyLinkedList {
     this.noOfNodes--;
   }
 
+  search = data => {
+    let curr = this.getHead();
+    while (curr.data != data) {
+      curr = curr.pointer;
+      if (curr.pointer == null) break;
+    }
+    return curr.data == data ? 'found' : 'not found';
+  };
+
   traverseList(node) {
     // while (node) {
     console.log(node.data);
@@ -129,3 +138,4 @@ sll.removeAtPos(4);
 // console.log(sll.getTail());
 // console.log(sll.noOfNodes);
 sll.traverseList(sll.getHead());
+console.log(sll.search(30));

@@ -20,7 +20,7 @@ class DoublyLinkedList {
       node.next = this.getHead();
       this.head.prev = node;
       this.head = node;
-      //   console.log(this.head);
+      // console.log(this.head);
     }
     this.noOfNodes++;
   };
@@ -45,7 +45,7 @@ class DoublyLinkedList {
       curr.prev = node;
       this.noOfNodes++;
     }
-    // console.log(this.head.next);
+    // console.log(this);
   };
   insertAtEnd = data => {
     let node = this.createNode(data);
@@ -92,6 +92,15 @@ class DoublyLinkedList {
     this.noOfNodes--;
   };
 
+  search = data => {
+    let curr = this.getHead();
+    while (curr.data != data) {
+      curr = curr.next;
+      if (curr.next == null) break;
+    }
+    return curr.data == data ? 'found' : 'not found';
+  };
+
   traverseList = node => {
     console.log(node.data);
     if (node.next != null) {
@@ -122,8 +131,9 @@ dll.insertAtBegining(20);
 dll.insertAtBegining(10);
 dll.insertAtEnd(30);
 dll.insertAtPos(2, 15);
-dll.remove(15);
-dll.removeAtPos(3);
-dll.traverseList(dll.getHead());
+// dll.remove(15);
+// dll.removeAtPos(3);
+// dll.traverseList(dll.getHead());
+console.log(dll.search(30));
 // console.log(dll.getTail());
 console.log('No of nodes: ' + dll.getNoOfNodes());
