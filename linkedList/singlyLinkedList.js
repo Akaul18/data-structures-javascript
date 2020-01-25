@@ -40,8 +40,9 @@ class SinglyLinkedList {
       }
       node.pointer = curr;
       prev.pointer = node;
+      this.noOfNodes++;
     }
-    this.noOfNodes++;
+    // console.log('no of nodes: ' + this.noOfNodes);
   }
 
   insertAtEnd(data) {
@@ -56,6 +57,37 @@ class SinglyLinkedList {
       this.tail.pointer = newNode;
     }
     this.noOfNodes++;
+  }
+
+  remove(data) {
+    let curr = this.head;
+    let prev;
+    if (curr.data != data) {
+      prev = curr;
+      curr = curr.pointer;
+    }
+    prev.pointer = curr.pointer;
+    this.noOfNodes--;
+  }
+
+  removeAtPos(index) {
+    let curr = this.head;
+    let prev;
+    let iterator = 1;
+    if (index == 0) {
+      this.head = curr.next;
+    } else if (index < 0 || index > this.noOfNodes) {
+      return 'Invalid index';
+    } else {
+      while (iterator < index) {
+        prev = curr;
+        curr = curr.pointer;
+        iterator++;
+      }
+      prev.pointer = curr.pointer;
+      console.log(prev);
+    }
+    this.noOfNodes--;
   }
 
   traverseList(node) {
@@ -76,6 +108,9 @@ class SinglyLinkedList {
   getTail() {
     return this.tail;
   }
+  getNoOfNodes() {
+    return this.noOfNodes;
+  }
 }
 
 let sll = new SinglyLinkedList();
@@ -88,5 +123,9 @@ sll.insertAtBegining(50);
 sll.insertAtEnd(5);
 
 sll.insertAtPos(6, 45);
-console.log(sll.getTail());
+sll.remove(40);
+sll.removeAtPos(4);
+// console.log(sll.getHead());
+// console.log(sll.getTail());
+// console.log(sll.noOfNodes);
 sll.traverseList(sll.getHead());
