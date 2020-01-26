@@ -45,7 +45,7 @@ class DoublyLinkedList {
       curr.prev = node;
       this.noOfNodes++;
     }
-    // console.log(this);
+    // console.log(this.head.next.next);
   };
   insertAtEnd = data => {
     let node = this.createNode(data);
@@ -134,6 +134,6 @@ dll.insertAtPos(2, 15);
 // dll.remove(15);
 // dll.removeAtPos(3);
 // dll.traverseList(dll.getHead());
-console.log(dll.search(30));
+// console.log(dll.search(30));
 // console.log(dll.getTail());
 console.log('No of nodes: ' + dll.getNoOfNodes());
