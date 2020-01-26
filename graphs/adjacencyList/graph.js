@@ -1,4 +1,5 @@
-const Queue = require('./Queue');
+const Queue = require('./queue');
+const Stack = require('./stack');
 
 class Graph {
   constructor(noOfVertices) {
@@ -41,8 +42,8 @@ class Graph {
       let curr = q.dequeue();
       console.log(curr);
 
-      let getNeighbour = this.list.get(curr);
-      getNeighbour.forEach(neighbour => {
+      let neighbourList = this.list.get(curr);
+      neighbourList.forEach(neighbour => {
         if (!visited[neighbour]) {
           visited[neighbour] = true;
           q.enqueue(neighbour);
@@ -50,6 +51,26 @@ class Graph {
       });
     }
     // console.log(visited.B);
+  };
+
+  dfs = startVertex => {
+    let visited = [];
+    let s = new Stack();
+    visited[startVertex] = true;
+    s.push(startVertex);
+
+    while (!s.isEmpty()) {
+      let curr = s.pop();
+      console.log(curr);
+
+      let neighbourList = this.list.get(curr);
+      neighbourList.forEach(neighbour => {
+        if (!visited[neighbour]) {
+          s.push(neighbour);
+          visited[neighbour] = true;
+        }
+      });
+    }
   };
 }
 
@@ -71,4 +92,7 @@ graph.addEdge('E', 'C');
 graph.addEdge('C', 'F');
 graph.addEdge('z', 'y');
 graph.printGraph();
+console.log('BFS');
 graph.bfs('B');
+console.log('DFS');
+graph.dfs('B');
