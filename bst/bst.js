@@ -1,4 +1,6 @@
 const Node = require('./nodeClass');
+const Stack = require('../graphs/adjacencyList/stack');
+const Queue = require('../graphs/adjacencyList/queue');
 
 class BinarySearchTree {
   constructor() {
@@ -36,9 +38,9 @@ class BinarySearchTree {
 
   /////////////////removal
   remove(data) {
-    // console.log(this.removeNode(this.root, data));
-    this.root = this.removeNode(this.root, data);
-    return this.root;
+    return this.removeNode(this.root, data);
+    // this.root = this.removeNode(this.root, data);
+    // return this.root;
   }
 
   removeNode(node, key) {
@@ -135,6 +137,31 @@ class BinarySearchTree {
       return this.findMaxNode(node.right);
     }
   }
+
+  ////////////bfs and dfs
+
+  dfs = rootNode => {
+    let visited = {};
+    let s = new Stack();
+    visited[rootNode.value] = true;
+    s.push(rootNode);
+    let neighbourList = [];
+
+    while (!s.isEmpty()) {
+      let curr = s.pop();
+      console.log(curr.value);
+
+      if (curr.left !== null) neighbourList.push(curr.left);
+      if (curr.right !== null) neighbourList.push(curr.right);
+
+      neighbourList.forEach(neighbour => {
+        if (!visited[neighbour.value]) {
+          s.push(neighbour);
+          visited[neighbour.value] = true;
+        }
+      });
+    }
+  };
 }
 
 let bst = new BinarySearchTree();
@@ -151,10 +178,16 @@ bst.insert(9);
 bst.insert(8);
 bst.insert(11);
 
+// console.log(bst.remove(10));
+// console.log(bst.search(bst.getRootNode(), 12));
 // console.log('preOrder traversal\n');
 // bst.preOrder(bst.getRootNode());
-// console.log('inOrder traversal\n');
-// bst.inOrder(bst.getRootNode());
+console.log('inOrder traversal\n');
+bst.inOrder(bst.getRootNode());
+
+console.log('DFS');
+bst.dfs(bst.getRootNode());
+
 // console.log('postOrder traversal\n');
 // bst.postOrder(bst.getRootNode());
 
@@ -165,5 +198,3 @@ bst.insert(11);
 // console.log(bst.findMaxNode(bst.getRootNode()));
 
 // console.log(bst.getRootNode());
-// console.log(bst.remove(1).left);
-console.log(bst.search(bst.getRootNode(), 13));

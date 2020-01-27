@@ -16,6 +16,13 @@ class Stack {
     if (this.stack.length === 0) return true;
     return false;
   };
+
+  printStack = () => {
+    this.stack.forEach((item, i) => {
+      process.stdout.write(item);
+      if (i === this.stack.length - 1) process.stdout.write('\n');
+    });
+  };
 }
 
 module.exports = Stack;
