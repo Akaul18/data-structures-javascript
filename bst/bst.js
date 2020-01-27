@@ -151,12 +151,36 @@ class BinarySearchTree {
       let curr = s.pop();
       console.log(curr.value);
 
-      if (curr.left !== null) neighbourList.push(curr.left);
-      if (curr.right !== null) neighbourList.push(curr.right);
+      if (curr.left != null) neighbourList.push(curr.left);
+      if (curr.right != null) neighbourList.push(curr.right);
 
       neighbourList.forEach(neighbour => {
         if (!visited[neighbour.value]) {
           s.push(neighbour);
+          visited[neighbour.value] = true;
+        }
+      });
+    }
+  };
+
+  bfs = startNode => {
+    let q = new Queue();
+    let visited = {};
+    visited[startNode.value] = true;
+    q.enqueue(startNode);
+
+    let neighbourList = [];
+
+    while (!q.isEmpty()) {
+      let curr = q.dequeue();
+      console.log(curr.value);
+
+      if (curr.left != null) neighbourList.push(curr.left);
+      if (curr.right != null) neighbourList.push(curr.right);
+
+      neighbourList.forEach(neighbour => {
+        if (!visited[neighbour.value]) {
+          q.enqueue(neighbour);
           visited[neighbour.value] = true;
         }
       });
@@ -187,6 +211,9 @@ bst.inOrder(bst.getRootNode());
 
 console.log('DFS');
 bst.dfs(bst.getRootNode());
+
+console.log('BFS');
+bst.bfs(bst.getRootNode());
 
 // console.log('postOrder traversal\n');
 // bst.postOrder(bst.getRootNode());
