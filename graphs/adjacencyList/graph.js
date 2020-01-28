@@ -62,7 +62,6 @@ class Graph {
     while (!s.isEmpty()) {
       let curr = s.pop();
       console.log(curr);
-
       let neighbourList = this.list.get(curr);
       neighbourList.forEach(neighbour => {
         if (!visited[neighbour]) {
